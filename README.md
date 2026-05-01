@@ -160,7 +160,48 @@ Job Source → n8n → FastAPI → AI Analysis → Store/Notify
 
 ---
 
-## 💣 Why This Project Matters
+## 🎯 Customization (User Profile-Based Analysis)
+
+The job analysis logic is **fully customizable** based on the user's profile.
+
+The scoring and decision system depends on the prompt, which can be adjusted to reflect:
+
+* Preferred tech stack (e.g., Python, React, FastAPI)
+* Experience level (Junior / Mid / Senior)
+* Location preferences (e.g., Germany, remote)
+* Language requirements (English-friendly roles)
+* Domain interests (AI, fintech, healthcare, etc.)
+
+### Example
+
+You can modify the prompt dynamically:
+
+```python
+prompt = f"""
+Analyze this job based on the following profile:
+
+Preferred Stack: Python, FastAPI, React
+Experience Level: Junior
+Location: Germany (English-friendly roles only)
+
+Return:
+- Score (0–100)
+- Decision: APPLY or SKIP
+- Reason
+
+Job:
+{data.job_description}
+"""
+```
+
+### Why this matters
+
+This allows the system to behave like a **personalized job assistant**, rather than a static keyword matcher.
+
+Different users can plug in different profiles and get tailored job recommendations.
+
+
+## 💣 Why This Product Matters
 
 Most job applications are blind and inefficient.
 This system turns job hunting into a data-driven process by:
