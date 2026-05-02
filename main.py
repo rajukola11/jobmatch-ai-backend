@@ -11,7 +11,11 @@ load_dotenv()
 app = FastAPI()
 
 api_key = os.getenv("OPENAI_API_KEY")
-model_name = os.getenv("OPENAI_MODEL", "gpt-4.1-mini") 
+model_name = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
+
+class CVRequest(BaseModel):
+    job_description: str
+    base_cv: str
 
 if not api_key:
     raise ValueError("OPENAI_API_KEY is not set")
@@ -69,3 +73,30 @@ async def analyze_job(data: JobRequest):
         }
 
     return parsed
+
+@app.post("/generate-cv")
+async def generate_cv(data: CVRequest):
+
+    prompt = f"""
+    Rewrite the CV to match the job.
+
+    Focus:
+    - Highlight relevant skills
+    - Make it short and clear
+    - No lies
+
+    Job:
+    {data.job_description}
+
+    CV:
+    {data.base_cv}
+    """
+
+    response = client.chat.completions.create(
+        model=model_name,
+        messages=[{"role": "user", "content": prompt}],
+    )
+
+    return {
+        "tailored_cv": response.choices[0].message.content
+    }
