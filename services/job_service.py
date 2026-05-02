@@ -6,13 +6,23 @@ from core.config import OPENAI_MODEL
 
 def analyze_job_logic(job_description: str):
     prompt = f"""
-    Analyze job and return JSON only.
+    Analyze the job description and respond ONLY in valid JSON.
+    Respond ONLY with raw JSON.
+    Do NOT use markdown.
+    Do NOT use ```.
 
+    Format:
     {{
-      "score": number,
-      "decision": "APPLY" or "SKIP",
-      "reason": "short"
+    "score": number (0-100),
+    "decision": "APPLY" or "SKIP",
+    "reason": "short reason"
     }}
+
+    Rules:
+    - Consider React, JavaScript, FastAPI relevance
+    - Prefer junior roles (0-2 years)
+    - Prefer English-friendly roles
+    - Be strict (don't give high scores easily)
 
     Job:
     {job_description}
