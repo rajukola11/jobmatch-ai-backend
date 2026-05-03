@@ -1,3 +1,6 @@
+from services.openai_client import client
+from core.config import OPENAI_MODEL
+
 def generate_cv_logic(job_description: str, base_cv: str):
     prompt = f"""
 You are an expert CV writer for software engineering roles in Europe.
