@@ -2,7 +2,7 @@ from services.openai_client import client
 from core.config import OPENAI_MODEL
 
 
-def generate_cover_letter_logic(job_description: str, company: str, base_cv: str):
+def generate_cover_letter_logic(job_description: str, company: str, cv_text: str):
     prompt = f"""
 You are writing a professional EU-style cover letter for a junior software engineer role.
 
@@ -28,8 +28,8 @@ JOB DESCRIPTION:
 COMPANY:
 {company}
 
-BASE CV:
-{base_cv}
+CV TEXT:
+{cv_text}
 """
 
     response = client.chat.completions.create(

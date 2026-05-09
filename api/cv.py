@@ -7,7 +7,7 @@ router = APIRouter()
 @router.post("/generate-cv")
 async def generate_cv(data: CVRequest):
     try:
-        result = generate_cv_logic(data.job_description, data.base_cv)
+        result = generate_cv_logic(data.job_description, data.cv_text)
         return {"tailored_cv": result}
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e))

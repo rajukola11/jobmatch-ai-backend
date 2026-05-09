@@ -10,6 +10,6 @@ async def generate_cover_letter(data: CoverLetterRequest):
         "cover_letter": generate_cover_letter_logic(
             data.job_description,
             data.company,
-            data.base_cv
+            data.cv_text
         )
     }
